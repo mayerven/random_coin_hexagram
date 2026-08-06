@@ -16,13 +16,13 @@ one question -> six virtual throws -> base hexagram -> moving lines -> changed h
 Requires Python 3.10+ and no third-party packages.
 
 ```bash
-python3 scripts/cast.py --question "我现在是否适合暂停主动联系？" --show-coins
+python3 scripts/cast.py --question "今天应该优先处理哪项任务？" --show-coins
 ```
 
 Example output includes the six throws from the bottom line to the top line:
 
 ```text
-问题：我现在是否适合暂停主动联系？
+问题：今天应该优先处理哪项任务？
 本卦：火天大有（上离下乾）
 动爻：初爻、四爻
 变卦：山风蛊（上艮下巽）
@@ -66,7 +66,7 @@ This repository is also a standalone Codex skill. Clone it into a skill root as
 `random-yao`:
 
 ```bash
-git clone https://github.com/mayerven/random_coin_hexagram.git \
+git clone REPOSITORY_URL \
   ~/.codex/skills/random-yao
 ```
 
@@ -85,4 +85,3 @@ This is a randomized reflection tool. It does not establish another person's
 private thoughts, predict the future, or replace medical, legal, financial, or
 safety decisions. For the same question, cast once, reflect, and avoid repeated
 draws merely to seek a preferred answer.
-
