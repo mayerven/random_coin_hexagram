@@ -1,0 +1,4 @@
+interface:
+  display_name: "随机六爻起卦"
+  short_description: "随机投掷三枚虚拟钱币，生成六爻本卦、动爻和变卦结果"
+  default_prompt: "Use $random-yao to simulate a single six-line coin divination for my question."
