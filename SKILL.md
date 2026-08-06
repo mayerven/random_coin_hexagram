@@ -13,7 +13,7 @@ Run `scripts/cast.py` once for one clearly stated question. Use the optional
 `--question` text only as a label; it does not affect the random draw.
 
 ```bash
-python scripts/cast.py --question "我现在是否适合暂停主动联系？"
+python scripts/cast.py --question "今天是否适合出远门？"
 ```
 
 ## Workflow
@@ -42,4 +42,3 @@ python scripts/cast.py --question "我现在是否适合暂停主动联系？"
 - `--show-coins`: Include the three virtual coin faces for every line.
 - `--values 6,7,8,9,6,7`: Test a known six-line sequence. Values are written
   from the first throw (bottom line) to the sixth throw (top line).
-

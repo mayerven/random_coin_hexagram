@@ -16,13 +16,13 @@ one question -> six virtual throws -> base hexagram -> moving lines -> changed h
 Requires Python 3.10+ and no third-party packages.
 
 ```bash
-python3 scripts/cast.py --question "今天应该优先处理哪项任务？" --show-coins
+python3 scripts/cast.py --question "今天是否适合出远门？" --show-coins
 ```
 
 Example output includes the six throws from the bottom line to the top line:
 
 ```text
-问题：今天应该优先处理哪项任务？
+问题：今天是否适合出远门？
 本卦：火天大有（上离下乾）
 动爻：初爻、四爻
 变卦：山风蛊（上艮下巽）
@@ -89,7 +89,7 @@ git clone REPOSITORY_URL \
 Then invoke it with a request such as:
 
 ```text
-Use $random-yao to simulate a single six-line coin divination for my question.
+Use $random-yao to simulate a single six-line coin divination for the question: 今天是否适合出远门？
 ```
 
 The skill instructions are in [SKILL.md](SKILL.md). UI metadata for compatible
@@ -101,14 +101,19 @@ clients is in [agents/openai.yaml](agents/openai.yaml).
 投掷、每爻数值、本卦、动爻和变卦，并把结果组织成一次性的反思提示。`--question`
 只用于标记问题，不会参与随机数计算；同一个问题不应为了得到喜欢的答案而反复起卦。
 
-它适合和其他负责澄清问题、整理信息或复盘行动的 skill 串联使用，例如：
+它可以和其他玄学类 skill 串联使用，但本项目不会自动调用或安装它们。常见的
+联动方式包括：
 
-- `$brainstorming-research-ideas`：先把模糊困惑拆成一个清晰、可行动的问题，再交给 `random-yao` 起卦。
-- `$scientific-critical-thinking`：对卦象中的假设、证据和不确定性做理性复盘，避免把随机结果当成事实。
-- `$markdown-mermaid-writing`：把起卦记录、行动方案和后续复盘整理成结构化 Markdown 文档。
+- **八字或紫微斗数 skill**：先看个人长期状态、流年或出行时机，再用 `random-yao`
+  针对“今天是否出远门”这类短期选择起卦。
+- **风水或择日 skill**：先比较日期、方位和场所条件，再让 `random-yao` 作为
+  当下决策的另一种象征性视角。
+- **塔罗或梅花易数 skill**：对同一个问题提供不同体系的反思框架；应避免连续
+  重复占问，并把各体系结果当作参考而不是互相证明。
 
-这些 skill 可以按顺序分别调用，联动结果取决于各自的输入和输出；本项目不会
-自动调用或安装其他 skill。
+如果环境中安装了这些 skill，可以先后调用并把前一步的摘要交给下一步；它们之间
+没有固定的接口或自动同步机制。涉及天气、交通、健康和安全时，仍应以现实数据
+和专业建议为准。
 
 ## Interpretation Boundary
 
