@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import secrets
 import sys
 
@@ -82,11 +83,29 @@ def render_line(value: int, position: int, show_moving: bool = True) -> str:
     return f"{LINE_NAMES[position]}爻  {line}  ({value})"
 
 
+def cast_record(question: str, values: list[int], coin_faces: list[list[str]]) -> dict[str, object]:
+    upper, lower, base_name = hexagram_name(line_bits(values))
+    changed_bits = line_bits(values, changed=True)
+    changed_upper, changed_lower, changed_name = hexagram_name(changed_bits)
+    moving = [f"{LINE_NAMES[index]}爻" for index, value in enumerate(values) if value in (6, 9)]
+    return {
+        "question": question,
+        "rule": "正=3，反=2；结果按初爻到上爻记录。",
+        "values": values,
+        "coin_faces": coin_faces,
+        "base": {"name": base_name, "upper": upper, "lower": lower},
+        "moving": moving,
+        "changed": {"name": changed_name, "upper": changed_upper, "lower": changed_lower},
+        "lines": [render_line(value, index) for index, value in enumerate(values)],
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--question", default="未指定", help="label for this cast")
     parser.add_argument("--show-coins", action="store_true", help="show virtual coin faces")
     parser.add_argument("--values", help="six test values from bottom to top, e.g. 6,7,8,9,6,7")
+    parser.add_argument("--format", choices=("text", "json"), default="text", help="output format")
     args = parser.parse_args()
 
     try:
@@ -102,10 +121,15 @@ def main() -> int:
             values.append(value)
             coin_faces.append(faces)
 
-    upper, lower, base_name = hexagram_name(line_bits(values))
-    changed_bits = line_bits(values, changed=True)
-    changed_upper, changed_lower, changed_name = hexagram_name(changed_bits)
-    moving = [f"{LINE_NAMES[index]}爻" for index, value in enumerate(values) if value in (6, 9)]
+    record = cast_record(args.question, values, coin_faces)
+    if args.format == "json":
+        print(json.dumps(record, ensure_ascii=False, indent=2))
+        return 0
+
+    upper = record["base"]["upper"]
+    lower = record["base"]["lower"]
+    base_name = record["base"]["name"]
+    moving = record["moving"]
 
     print(f"问题：{args.question}")
     print("规则：正=3，反=2；结果按初爻到上爻记录。")
@@ -121,7 +145,8 @@ def main() -> int:
 
     if moving:
         print(f"\n动爻：{'、'.join(moving)}")
-        print(f"变卦：{changed_name}（上{changed_upper}下{changed_lower}）")
+        changed = record["changed"]
+        print(f"变卦：{changed['name']}（上{changed['upper']}下{changed['lower']}）")
     else:
         print("\n动爻：无；此卦以本卦为主。")
 
