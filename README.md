@@ -121,3 +121,31 @@ This is a randomized reflection tool. It does not establish another person's
 private thoughts, predict the future, or replace medical, legal, financial, or
 safety decisions. For the same question, cast once, reflect, and avoid repeated
 draws merely to seek a preferred answer.
+
+
+## ChatGPT Upload Bundle
+
+A ChatGPT-oriented distribution is available under
+[`chatgpt/random-yao/`](chatgpt/random-yao/). Unlike the Codex-oriented root
+skill, this variant does not require persistent `history/` archiving and is
+packaged for direct skill upload.
+
+Build the ZIP with:
+
+```bash
+python3 scripts/build_chatgpt_bundle.py
+```
+
+The command writes:
+
+```text
+dist/random-yao-chatgpt.zip
+```
+
+The archive contains exactly one top-level `random-yao/` folder with one
+`SKILL.md` and its bundled casting script.
+
+When skill upload is enabled for your ChatGPT account/workspace, install it from
+**Plugins → Skills → Create → Upload from your computer**, then select the
+generated ZIP and review/install the skill. ChatGPT skill availability depends
+on the current plan, workspace settings, and product rollout.
